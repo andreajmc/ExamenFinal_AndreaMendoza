@@ -471,6 +471,11 @@ public class Principal extends javax.swing.JFrame {
         );
 
         Salir1.setText("Nuevo Usuario");
+        Salir1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Salir1MouseClicked(evt);
+            }
+        });
 
         Salir2.setText("Salir");
         Salir2.addActionListener(new java.awt.event.ActionListener() {
@@ -480,6 +485,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         Salir4.setText("Nuevo ATM");
+        Salir4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Salir4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1021,7 +1031,7 @@ public class Principal extends javax.swing.JFrame {
         BinaryManager BM = new BinaryManager("./User Information.aj");
         BM.cargarArchivo();
         for (Object user1 : BM.getUsers()) {
-            if (((Cliente) user1).equals(USER.getUN())) {
+            if (((Cliente) user1).getUN().equals(USER.getUN())) {
                 for (Cuenta c : ((Cliente) user1).getCuentas()) {
                     if (c.equals(((Cuenta) CuentaP.getSelectedItem()))) {
                         c.setSaldo(SaldoA - Ret);
@@ -1084,7 +1094,7 @@ public class Principal extends javax.swing.JFrame {
         BinaryManager BM = new BinaryManager("./User Information.aj");
         BM.cargarArchivo();
         for (Object user1 : BM.getUsers()) {
-            if (((Cliente) user1).equals(USER.getUN())) {
+            if (((Cliente) user1).getUN().equals(USER.getUN())) {
                 for (Cuenta c : ((Cliente) user1).getCuentas()) {
                     if (c.equals(((Cuenta) Cuentas.getSelectedItem()))) {
                         c.setSaldo(SaldoA + Dep);
@@ -1117,13 +1127,16 @@ public class Principal extends javax.swing.JFrame {
         BinaryManager BM = new BinaryManager("./User Information.aj");
         BM.cargarArchivo();
         System.out.println(BM.getUsers());
-        for (Object user1 : BM.getUsers()) {
-            if (((Cliente) user1).equals(USER.getUN())) {
+        for (Usuarios user1 : BM.getUsers()) {
+            if (((Cliente) user1).getUN().equals(USER.getUN())) {
                 ((Cliente) user1).addCuenta(c);
+
             }
-            BM.escribirArchivo();
-            JOptionPane.showMessageDialog(null, "¡Cuenta realizada exitósamente.\n El número de su nueva cuenta es: " + CID);
+            break;
         }
+        BM.escribirArchivo();
+        JOptionPane.showMessageDialog(null, "¡Cuenta realizada exitósamente.\n El número de su nueva cuenta es: " + CID);
+
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -1209,7 +1222,7 @@ public class Principal extends javax.swing.JFrame {
         ATMManager AM = new ATMManager("./ATM Information.aj");
         AM.cargarArchivo();
         for (Object user1 : AM.getATMS()) {
-            if (((ATM) user1).equals( ((ATM) Cuentas2.getSelectedItem()))) {
+            if (((ATM) user1).equals(((ATM) Cuentas2.getSelectedItem()))) {
                 ((ATM) user1).setSaldoTotal(((ATM) Cuentas2.getSelectedItem()).getSaldoTotal() + Integer.parseInt(Total2.getText()));
             }
         }
@@ -1251,6 +1264,18 @@ public class Principal extends javax.swing.JFrame {
             Sucursal.setModel(m);
         }
     }//GEN-LAST:event_SucursalMouseClicked
+
+    private void Salir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Salir1MouseClicked
+        CreateUser.pack();
+        CreateUser.setLocationRelativeTo(null);
+        CreateUser.setVisible(true);
+    }//GEN-LAST:event_Salir1MouseClicked
+
+    private void Salir4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Salir4MouseClicked
+        CreateATM.pack();
+        CreateATM.setLocationRelativeTo(null);
+        CreateATM.setVisible(true);
+    }//GEN-LAST:event_Salir4MouseClicked
 
     public static void main(String args[]) {
         /* Usuarios A = new Cliente(new ArrayList(), "andreaj", "Andrea", "José", "Mendoza", "Castañeda", "andrea123", "1999", "2018", new ArrayList());

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class BinaryManager {
 
     private String path;
-    private ArrayList Users;
+    private ArrayList<Usuarios> Users;
     private File archivo = null;
 
     public BinaryManager(String path) {
@@ -35,11 +35,11 @@ public class BinaryManager {
         this.path = path;
     }
 
-    public ArrayList getUsers() {
+    public ArrayList<Usuarios> getUsers() {
         return Users;
     }
 
-    public void setUsers(ArrayList Users) {
+    public void setUsers(ArrayList<Usuarios> Users) {
         this.Users = Users;
     }
 
