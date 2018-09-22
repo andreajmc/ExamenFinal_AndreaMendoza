@@ -173,6 +173,11 @@ public class Principal extends javax.swing.JFrame {
                 jButton5MouseClicked(evt);
             }
         });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(255, 255, 153));
         jButton6.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
@@ -478,6 +483,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         Salir2.setText("Salir");
+        Salir2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Salir2MouseClicked(evt);
+            }
+        });
         Salir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Salir2ActionPerformed(evt);
@@ -534,12 +544,22 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel14.setText("Seleccionar ATM");
 
+        c1003.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                c1003StateChanged(evt);
+            }
+        });
         c1003.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 c1003MouseClicked(evt);
             }
         });
 
+        c5003.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                c5003StateChanged(evt);
+            }
+        });
         c5003.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 c5003MouseClicked(evt);
@@ -1170,6 +1190,14 @@ public class Principal extends javax.swing.JFrame {
             temp += logs.toString() + "\n";
         }
         Trans.setText(temp);
+        BinaryManager BM = new BinaryManager("./User Information.aj");
+        for (Usuarios user1 : BM.getUsers()) {
+            if (((Cliente) user1).getUN().equals(USER.getUN())) {
+                ((Cliente) user1).setLog(((Cliente) USER).getLog());
+            }
+            break;
+        }
+        BM.escribirArchivo();
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void SalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirMouseClicked
@@ -1277,6 +1305,24 @@ public class Principal extends javax.swing.JFrame {
         CreateATM.setVisible(true);
     }//GEN-LAST:event_Salir4MouseClicked
 
+    private void Salir2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Salir2MouseClicked
+    System.exit(0);
+    }//GEN-LAST:event_Salir2MouseClicked
+
+    private void c1003StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_c1003StateChanged
+       int tot = (int) c1003.getValue() * 100 + (int) c5003.getValue() * 500;
+        Total2.setText(String.valueOf(tot));
+    }//GEN-LAST:event_c1003StateChanged
+
+    private void c5003StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_c5003StateChanged
+       int tot = (int) c1003.getValue() * 100 + (int) c5003.getValue() * 500;
+        Total2.setText(String.valueOf(tot));
+    }//GEN-LAST:event_c5003StateChanged
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     public static void main(String args[]) {
         /* Usuarios A = new Cliente(new ArrayList(), "andreaj", "Andrea", "José", "Mendoza", "Castañeda", "andrea123", "1999", "2018", new ArrayList());
         Usuarios B = new Mantenimiento(new ArrayList(), "diegom", "Diego", "", "Mendoza", "", "dieog123", "1997", "2018", new ArrayList());
@@ -1285,7 +1331,7 @@ public class Principal extends javax.swing.JFrame {
         ((Mantenimiento) B).addATMs(A1);
         ((Mantenimiento) B).addATMs(A2);*/
         System.out.println("Cuenta: andreaj \n PW: andreaj123");
-        System.out.println("Cuenta Matenimiento: diegom \n PW: diego123");
+        System.out.println("Cuenta Matenimiento: diegom \n PW: dieog123");
         BinaryManager BM = new BinaryManager("./User Information.aj");
         BM.cargarArchivo();
         //    BM.getUsers().add(A);
