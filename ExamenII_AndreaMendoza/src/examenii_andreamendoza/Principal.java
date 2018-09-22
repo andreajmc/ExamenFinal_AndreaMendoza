@@ -1055,6 +1055,7 @@ public class Principal extends javax.swing.JFrame {
                 for (Cuenta c : ((Cliente) user1).getCuentas()) {
                     if (c.equals(((Cuenta) CuentaP.getSelectedItem()))) {
                         c.setSaldo(SaldoA - Ret);
+                        break;
                     }
                 }
 
